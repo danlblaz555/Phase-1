@@ -32,4 +32,24 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         tableBody.appendChild(row);
     }
+// Handle login form submission
+document.getElementById('loginForm').addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get the entered username and password
+    const enteredUsername = document.getElementById('username').value;
+    const enteredPassword = document.getElementById('password').value;
+
+    // Retrieve the saved credentials from localStorage
+    const savedUsername = localStorage.getItem('username');
+    const savedPassword = localStorage.getItem('password');
+
+    // Check if the credentials match
+    if (enteredUsername === savedUsername && enteredPassword === savedPassword) {
+        alert('Login successful! Welcome, ' + savedUsername + '.');
+        // Redirect to a protected page or home page
+        window.location.href = 'welcome.html';
+    } else {
+        alert('Invalid username or password. Please try again.');
+    }
 });
