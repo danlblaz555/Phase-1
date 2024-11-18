@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Submission</title>
+    <link rel="stylesheet" type="text/css" href="signup.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Expense Submission</h1>
+        <p>Please fill out the form below to submit an expense.</p>
+
+        <!-- Expense Submission Form -->
+        <form id="expenseForm">
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="travel">Travel</option>
+                <option value="utilities">Utilities</option>
+                <option value="food">Food</option>
+            </select>
+            <br><br>
+
+            <label for="totalCost">Total Cost:</label>
+            <input type="number" id="totalCost" name="totalCost" placeholder="Enter total cost" required>
+            <br><br>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+            <br><br>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" placeholder="Enter a brief description" rows="4" cols="50" required></textarea>
+            <br><br>
+
+            <label for="participants">Participants:</label>
+            <input type="text" id="participants" name="participants" placeholder="Enter participants (comma-separated)" required>
+            <br><br>
+
+            <button type="submit">Submit Expense</button>
+        </form>
+    </div>
+
+    <!-- Display Submitted Expenses -->
+    <div class="container">
+        <h2>Submitted Expenses</h2>
+        <table id="expensesTable" border="1" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Total Cost</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Participants</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Expenses will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const expenseForm = document.getElementById('expenseForm');
+            const expensesTable = document.getElementById('expensesTable').querySelector('tbody');
+
+            // Handle expense submission
+            expenseForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                // Get form values
+                const category = document.getElementById('category').value;
+                const totalCost = document.getElementById('totalCost').value;
+                const date = document.getElementById('date').value;
+                const description = document.getElementById('description').value;
+                const participants = document.getElementById('participants').value;
+
+                // Create a new table row
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${category}</td>
+                    <td>${totalCost}</td>
+                    <td>${date}</td>
+                    <td>${description}</td>
+                    <td>${participants}</td>
+                `;
+
+                // Add the row to the table
+                expensesTable.appendChild(row);
+
+                // Reset the form
+                expenseForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>
